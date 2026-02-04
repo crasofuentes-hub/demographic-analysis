@@ -1,0 +1,9 @@
+[run]
+branch = True
+source =
+    models
+    scripts
+
+[report]
+skip_empty = True
+show_missing = True

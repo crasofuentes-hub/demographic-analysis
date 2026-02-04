@@ -1,4 +1,6 @@
-﻿![Cover](assets/cover.png)
+﻿[![CI](https://github.com/crasofuentes-hub/demographic-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/crasofuentes-hub/demographic-analysis/actions/workflows/ci.yml)
+
+![Cover](assets/cover.png)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18481531.svg)](https://doi.org/10.5281/zenodo.18481531)
 
@@ -36,4 +38,5 @@ MIT
 - **BibTeX:** [paper/citation.bib](paper/citation.bib)
 - **APA:** [paper/citation.apa.txt](paper/citation.apa.txt)
 - **Journal-style PDF:** [paper/manuscript_journal.pdf](paper/manuscript_journal.pdf)
+
 

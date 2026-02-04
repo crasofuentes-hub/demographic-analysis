@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 import json
 
 def _write_deterministic_csv(df: pd.DataFrame, path: str) -> None:
@@ -80,6 +80,8 @@ def run():
     _write_deterministic_csv(ind_con,  r"results\indicators_extreme.csv")
 
     with open(r"results\statistical_tests.json", "w", encoding="utf-8") as f:
-        json.dump({"realistic": stats_real, "extreme": stats_con}, f, indent=2, sort_keys=True)if __name__ == "__main__":
+        json.dump({"realistic": stats_real, "extreme": stats_con}, f, indent=2, sort_keys=True)
+
+if __name__ == "__main__":
     run()
 
