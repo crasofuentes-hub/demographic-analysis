@@ -2,3 +2,29 @@
 !paper/**
 !paper/figures/
 !paper/figures/**
+
+# ---- Added by CI hardening ----
+# ---- Python / venv ----
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+# ---- Pytest / Coverage ----
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.coverage.xml
+*.cover
+*.py,cover
+.pytest_cache/
+# ---- Logs / Archives ----
+*.log
+*.zip
+# ---- Project artifacts ----
+paper/*.log
+paper/*.html
+preprint/
+
