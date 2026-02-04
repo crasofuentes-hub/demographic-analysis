@@ -1,6 +1,5 @@
 ﻿![Cover](assets/cover.png)
 
-[![DOI](https://zenodo.org/badge/DOI/TU_DOI_AQUI.svg)](https://doi.org/TU_DOI_AQUI)
 
 # Demographic Analysis — Publication Package
 
@@ -16,4 +15,5 @@ python scripts/sensitivity_analysis.py
 
 ## License
 MIT
+
 
