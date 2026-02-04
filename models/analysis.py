@@ -1,5 +1,15 @@
 ﻿from __future__ import annotations
 import json
+
+def _write_deterministic_csv(df: pd.DataFrame, path: str) -> None:
+    """Write CSV deterministically across OS/Python (stable column order, floats, newlines)."""
+    # Stable column order: year first if present, then sorted remainder
+    cols = list(df.columns)
+    if "year" in cols:
+        rest = sorted([c for c in cols if c != "year"])
+        cols = ["year"] + rest
+        df = df[cols]
+    df.to_csv(path, index=False, float_format="%.10g", lineterminator="\n")
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -64,13 +74,12 @@ def run():
     ind_real = calculate_indicators(df_real)
     ind_con  = calculate_indicators(df_con)
 
-    df_real.to_csv(r"results\projections_realistic.csv", index=False)
-    df_con.to_csv(r"results\projections_extreme.csv", index=False)
-    ind_real.to_csv(r"results\indicators_realistic.csv", index=False)
-    ind_con.to_csv(r"results\indicators_extreme.csv", index=False)
+    _write_deterministic_csv(df_real, r"results\projections_realistic.csv")
+    _write_deterministic_csv(df_con,  r"results\projections_extreme.csv")
+    _write_deterministic_csv(ind_real, r"results\indicators_realistic.csv")
+    _write_deterministic_csv(ind_con,  r"results\indicators_extreme.csv")
 
     with open(r"results\statistical_tests.json", "w", encoding="utf-8") as f:
-        json.dump({"realistic": stats_real, "extreme": stats_con}, f, indent=2)
-
-if __name__ == "__main__":
+        json.dump({"realistic": stats_real, "extreme": stats_con}, f, indent=2, sort_keys=True)if __name__ == "__main__":
     run()
+
