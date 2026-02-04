@@ -1,4 +1,19 @@
 from __future__ import annotations
+
+# --- DETERMINISM_GUARD_V2 ---
+import os as _os
+_os.environ.setdefault("PYTHONHASHSEED", "0")
+try:
+    import random as _random
+    _random.seed(0)
+except Exception:
+    pass
+try:
+    import numpy as _np
+    _np.random.seed(0)
+except Exception:
+    pass
+# ----------------------------
 import json
 
 def _write_deterministic_csv(df: pd.DataFrame, path: str) -> None:

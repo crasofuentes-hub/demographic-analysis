@@ -1,22 +1,22 @@
 {
-  "realistic": {
-    "slope": -0.001347054468707473,
-    "intercept": 3.535475218582758,
-    "p_value_trend": 1.880049054977107e-115,
-    "r_squared": 0.9949365594333811,
-    "years_to_majority_loss": 2253.4168358428446,
-    "adf_statistic": -7.485043513451581,
-    "adf_p_value": 4.663033755154009e-11,
-    "is_stationary": true
-  },
   "extreme": {
-    "slope": -0.010184629169583653,
+    "adf_p_value": 3.0878353406275368e-27,
+    "adf_statistic": -14.68737602134161,
     "intercept": 21.52457281793575,
+    "is_stationary": true,
     "p_value_trend": 5.3229577093209655e-80,
     "r_squared": 0.9736637155486294,
-    "years_to_majority_loss": 2064.3434795569715,
-    "adf_statistic": -14.68737602134161,
-    "adf_p_value": 3.0878353406275368e-27,
-    "is_stationary": true
+    "slope": -0.010184629169583653,
+    "years_to_majority_loss": 2064.3434795569715
+  },
+  "realistic": {
+    "adf_p_value": 4.663033755154009e-11,
+    "adf_statistic": -7.485043513451581,
+    "intercept": 3.535475218582758,
+    "is_stationary": true,
+    "p_value_trend": 1.880049054977107e-115,
+    "r_squared": 0.9949365594333811,
+    "slope": -0.001347054468707473,
+    "years_to_majority_loss": 2253.4168358428446
   }
 }
