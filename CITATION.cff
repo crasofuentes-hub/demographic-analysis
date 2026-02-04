@@ -1,11 +1,15 @@
 ﻿cff-version: 1.2.0
-message: "If you use this work, please cite it."
-title: "Demographic Dynamics and the Mathematical Infeasibility of the “Great Replacement” Hypothesis"
-authors:
-  - family-names: Fuentes
-    given-names: Oscar
+message: "If you use this work, please cite it as below."
+title: "Demographic Dynamics and the Mathematical Infeasibility of the "Great Replacement" Hypothesis"
+version: "1.0.1"
 date-released: 2026-02-04
 license: MIT
+doi: "10.5281/zenodo.18481531"
+repository-code: "https://github.com/crasofuentes-hub/demographic-analysis"
+url: "https://github.com/crasofuentes-hub/demographic-analysis"
+authors:
+  - family-names: "Fuentes"
+    given-names: "Oscar"
 keywords:
   - demography
   - population dynamics

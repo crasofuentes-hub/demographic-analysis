@@ -15,8 +15,16 @@ python -m models.analysis
 python scripts/generate_figures.py
 python scripts/sensitivity_analysis.py
 
+## Citación
+
+- CITATION.cff (GitHub): [CITATION.cff](CITATION.cff)
+- BibTeX: [paper/citation.bib](paper/citation.bib)
+- APA: [paper/citation.apa.txt](paper/citation.apa.txt)
+- DOI (Zenodo): https://doi.org/10.5281/zenodo.18481531
+
 ## License
 MIT
+
 
 
 
