@@ -25,6 +25,15 @@ python scripts/sensitivity_analysis.py
 ## License
 MIT
 
+## Cite / Citation
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18481531.svg)](https://doi.org/10.5281/zenodo.18481531)
+[![Concept DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18481530.svg)](https://doi.org/10.5281/zenodo.18481530)
 
+- **Version DOI:** https://doi.org/10.5281/zenodo.18481531
+- **Concept DOI (latest):** https://doi.org/10.5281/zenodo.18481530
+- **CITATION.cff:** [CITATION.cff](CITATION.cff)
+- **BibTeX:** [paper/citation.bib](paper/citation.bib)
+- **APA:** [paper/citation.apa.txt](paper/citation.apa.txt)
+- **Journal-style PDF:** [paper/manuscript_journal.pdf](paper/manuscript_journal.pdf)
 
