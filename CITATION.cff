@@ -1,0 +1,14 @@
+﻿cff-version: 1.2.0
+message: "If you use this work, please cite it."
+title: "Demographic Dynamics and the Mathematical Infeasibility of the “Great Replacement” Hypothesis"
+authors:
+  - family-names: Fuentes
+    given-names: Oscar
+date-released: 2026-02-04
+license: MIT
+keywords:
+  - demography
+  - population dynamics
+  - cohort-component model
+  - migration
+  - statistical modeling
