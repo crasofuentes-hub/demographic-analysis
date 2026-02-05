@@ -3,7 +3,6 @@ from __future__ import annotations
 import hashlib
 import json
 import runpy
-import shutil
 from pathlib import Path
 
 import pandas as pd
@@ -18,6 +17,7 @@ EXPECTED = {
     "indicators_extreme.csv",
     "statistical_tests.json",
 }
+
 
 def _canon_hash(path: Path) -> str:
     """
@@ -44,6 +44,7 @@ def _canon_hash(path: Path) -> str:
 
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
+
 def test_reproducibility_outputs_match_repo(tmp_path, monkeypatch):
     """
     Strong reproducibility:
@@ -63,4 +64,6 @@ def test_reproducibility_outputs_match_repo(tmp_path, monkeypatch):
         ref = RESULTS / name
         assert got.exists(), f"Missing generated output: {got}"
         assert ref.exists(), f"Missing reference output tracked in repo: {ref}"
-        assert _canon_hash(got) == _canon_hash(ref), f"Non-reproducible output (canonical mismatch): {name}"
+        assert _canon_hash(got) == _canon_hash(ref), (
+            f"Non-reproducible output (canonical mismatch): {name}"
+        )

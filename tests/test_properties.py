@@ -1,10 +1,11 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
-from hypothesis import given, settings, strategies as st
-import math
+from hypothesis import given, settings
+from hypothesis import strategies as st
 
 # Property-based tests target model invariants at the "scenario parameter" layer
 # without assuming any specific country.
+
 
 @st.composite
 def rates(draw):
@@ -19,14 +20,16 @@ def rates(draw):
     lam = draw(st.floats(min_value=0.0, max_value=0.2, allow_nan=False, allow_infinity=False))
     return fA, fB, dA, dB, mA, mB, lam
 
+
 def step(N, f, d, m):
     return N + (N * f) - (N * d) + (N * m)
+
 
 @settings(max_examples=200, deadline=None)
 @given(
     NA=st.floats(min_value=1.0, max_value=1e8, allow_nan=False, allow_infinity=False),
     NB=st.floats(min_value=1.0, max_value=1e8, allow_nan=False, allow_infinity=False),
-    r=rates()
+    r=rates(),
 )
 def test_population_non_negative_under_reasonable_rates(NA, NB, r):
     fA, fB, dA, dB, mA, mB, lam = r
@@ -35,6 +38,7 @@ def test_population_non_negative_under_reasonable_rates(NA, NB, r):
     NB2 = step(NB, fB, dB, mB)
     assert NA2 > 0.0
     assert NB2 > 0.0
+
 
 @settings(max_examples=200, deadline=None)
 @given(r=rates())

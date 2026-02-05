@@ -1,8 +1,10 @@
-﻿from __future__ import annotations
+from __future__ import annotations
+
+from dataclasses import dataclass
+
 import numpy as np
 import pandas as pd
-from dataclasses import dataclass
-from typing import Dict
+
 
 @dataclass
 class CohortComponentModel:
@@ -13,12 +15,15 @@ class CohortComponentModel:
     - No modela estructura por edad explícita (agregado). Es adecuado para
       experimentos reproducibles y comparación de escenarios bajo supuestos controlados.
     """
-    initial_population: Dict[str, float]
-    fertility_rates: Dict[str, float]   # tasa anual efectiva per cápita (aprox)
-    mortality_rates: Dict[str, float]   # tasa anual de mortalidad
-    migration_rates: Dict[str, float]   # tasa anual neta (puede ser negativa)
 
-    def project(self, years: int, start_year: int = 2023, convergence_rate: float = 0.02) -> pd.DataFrame:
+    initial_population: dict[str, float]
+    fertility_rates: dict[str, float]  # tasa anual efectiva per cápita (aprox)
+    mortality_rates: dict[str, float]  # tasa anual de mortalidad
+    migration_rates: dict[str, float]  # tasa anual neta (puede ser negativa)
+
+    def project(
+        self, years: int, start_year: int = 2023, convergence_rate: float = 0.02
+    ) -> pd.DataFrame:
         results = []
         current = self.initial_population.copy()
         fert = self.fertility_rates.copy()
@@ -28,12 +33,16 @@ class CohortComponentModel:
 
         for t in range(years + 1):
             total = float(sum(current.values()))
-            row = {"year": start_year + t, **{g: float(current[g]) for g in groups}, "total_population": total}
+            row = {
+                "year": start_year + t,
+                **{g: float(current[g]) for g in groups},
+                "total_population": total,
+            }
             results.append(row)
 
             births = {g: current[g] * fert[g] for g in groups}
             deaths = {g: current[g] * mort[g] for g in groups}
-            mig   = {g: current[g] * self.migration_rates[g] for g in groups}
+            mig = {g: current[g] * self.migration_rates[g] for g in groups}
 
             nxt = {}
             for g in groups:
