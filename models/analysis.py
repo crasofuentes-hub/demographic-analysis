@@ -1,23 +1,36 @@
 from __future__ import annotations
-from __future__ import annotations
-
 
 # --- DETERMINISM_GUARD_V2 ---
 import os as _os
+
 _os.environ.setdefault("PYTHONHASHSEED", "0")
+
 try:
     import random as _random
+
     _random.seed(0)
 except Exception:
     pass
+
 try:
     import numpy as _np
+
     _np.random.seed(0)
 except Exception:
     pass
 # ----------------------------
 import json
 
+import numpy as np
+import pandas as pd
+from scipy import stats
+from statsmodels.tsa.stattools import adfuller
+
+from .cohort_model import CohortComponentModel
+from .scenarios import conspiracy_scenario_model, realistic_scenario_model
+
+
+# ----------------------------
 def _write_deterministic_csv(df: pd.DataFrame, path: str) -> None:
     """Write CSV deterministically across OS/Python (stable column order, floats, newlines)."""
     # Stable column order: year first if present, then sorted remainder
@@ -27,13 +40,7 @@ def _write_deterministic_csv(df: pd.DataFrame, path: str) -> None:
         cols = ["year"] + rest
         df = df[cols]
     df.to_csv(path, index=False, float_format="%.10g", lineterminator="\n")
-import numpy as np
-import pandas as pd
-from scipy import stats
-from statsmodels.tsa.stattools import adfuller
 
-from .cohort_model import CohortComponentModel
-from .scenarios import realistic_scenario_model, conspiracy_scenario_model
 
 def test_replacement_hypothesis(df: pd.DataFrame) -> dict:
     years = df["year"].to_numpy()
@@ -60,6 +67,7 @@ def test_replacement_hypothesis(df: pd.DataFrame) -> dict:
         "is_stationary": bool(adf_p < 0.05),
     }
 
+
 def calculate_indicators(df: pd.DataFrame) -> pd.DataFrame:
     out = []
     for _, r in df.iterrows():
@@ -68,37 +76,52 @@ def calculate_indicators(df: pd.DataFrame) -> pd.DataFrame:
         prop = prop / prop.sum()
         diversity = -float(np.sum([p * np.log(p) for p in prop if p > 0]))
 
-        out.append({
-            "year": int(r["year"]),
-            "proportion_group_a": float(r["group_a"] / total),
-            "dependency_ratio": float(r["group_b"] / r["group_a"]) if r["group_a"] > 0 else None,
-            "diversity_index": diversity
-        })
+        out.append(
+            {
+                "year": int(r["year"]),
+                "proportion_group_a": float(r["group_a"] / total),
+                "dependency_ratio": float(r["group_b"] / r["group_a"])
+                if r["group_a"] > 0
+                else None,
+                "diversity_index": diversity,
+            }
+        )
     return pd.DataFrame(out)
+
 
 def run():
     real = realistic_scenario_model()
-    m1 = CohortComponentModel(real["initial_population"], real["fertility_rates"], real["mortality_rates"], real["migration_rates"])
+    m1 = CohortComponentModel(
+        real["initial_population"],
+        real["fertility_rates"],
+        real["mortality_rates"],
+        real["migration_rates"],
+    )
     df_real = m1.project(100, start_year=2023, convergence_rate=real["convergence_rate"])
 
     con = conspiracy_scenario_model()
-    m2 = CohortComponentModel(con["initial_population"], con["fertility_rates"], con["mortality_rates"], con["migration_rates"])
+    m2 = CohortComponentModel(
+        con["initial_population"],
+        con["fertility_rates"],
+        con["mortality_rates"],
+        con["migration_rates"],
+    )
     df_con = m2.project(100, start_year=2023, convergence_rate=con["convergence_rate"])
 
     stats_real = test_replacement_hypothesis(df_real)
-    stats_con  = test_replacement_hypothesis(df_con)
+    stats_con = test_replacement_hypothesis(df_con)
 
     ind_real = calculate_indicators(df_real)
-    ind_con  = calculate_indicators(df_con)
+    ind_con = calculate_indicators(df_con)
 
     _write_deterministic_csv(df_real, r"results\projections_realistic.csv")
-    _write_deterministic_csv(df_con,  r"results\projections_extreme.csv")
+    _write_deterministic_csv(df_con, r"results\projections_extreme.csv")
     _write_deterministic_csv(ind_real, r"results\indicators_realistic.csv")
-    _write_deterministic_csv(ind_con,  r"results\indicators_extreme.csv")
+    _write_deterministic_csv(ind_con, r"results\indicators_extreme.csv")
 
     with open(r"results\statistical_tests.json", "w", encoding="utf-8") as f:
         json.dump({"realistic": stats_real, "extreme": stats_con}, f, indent=2, sort_keys=True)
 
+
 if __name__ == "__main__":
     run()
-
