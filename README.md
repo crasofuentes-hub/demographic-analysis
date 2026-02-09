@@ -2,7 +2,7 @@
 
 ![Cover](assets/cover.png)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18481531.svg)](https://doi.org/10.5281/zenodo.18481531)
+[![DOI](https://zenodo.org/badge/1152151690.svg)](https://doi.org/10.5281/zenodo.18517841)
 
 
 # Demographic Analysis — Publication Package
@@ -29,7 +29,7 @@ MIT
 
 ## Cite / Citation
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18481531.svg)](https://doi.org/10.5281/zenodo.18481531)
+[![DOI](https://zenodo.org/badge/1152151690.svg)](https://doi.org/10.5281/zenodo.18517841)
 [![Concept DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18481530.svg)](https://doi.org/10.5281/zenodo.18481530)
 
 - **Version DOI:** https://doi.org/10.5281/zenodo.18481531
@@ -38,5 +38,6 @@ MIT
 - **BibTeX:** [paper/citation.bib](paper/citation.bib)
 - **APA:** [paper/citation.apa.txt](paper/citation.apa.txt)
 - **Journal-style PDF:** [paper/manuscript_journal.pdf](paper/manuscript_journal.pdf)
+
 
 
