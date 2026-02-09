@@ -48,3 +48,15 @@ jobs:
         shell: bash
         run: |
           python -m pytest
+
+      - name: Build reproducible outputs
+        shell: bash
+        run: |
+          python -c "import runpy; runpy.run_module('models.analysis', run_name='__main__')"
+
+      - name: Upload results artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-${{ matrix.os }}-py${{ matrix.python-version }}
+          path: |
+            results/*
