@@ -39,5 +39,12 @@ MIT
 - **APA:** [paper/citation.apa.txt](paper/citation.apa.txt)
 - **Journal-style PDF:** [paper/manuscript_journal.pdf](paper/manuscript_journal.pdf)
 
+## Cite this work
 
+If you use this repository in research, please cite the Zenodo record.
+
+- **Concept DOI (recommended):** https://doi.org/10.5281/zenodo.18517841  
+  *(always resolves to the latest version)*
+- **Version DOI:** https://doi.org/10.5281/zenodo.18517842  
+  *(fixed snapshot for strict reproducibility)*
 
